@@ -13,4 +13,6 @@ interface Data<T> {
 	public T getValue();
 
 	public void write(DataOutputStream os) throws IOException;
+
+	public DataType getType();
 }

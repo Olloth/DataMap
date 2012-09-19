@@ -8,7 +8,7 @@ public enum DataType {
 	 * WARNING: It is required that the Enum constant name to be the same as the
 	 * class it represents in order for getType to function!
 	 */
-	ByteData(0), ShortData(1), IntegerData(2), LongData(3), FloatData(4), DoubleData(5), StringData(6), DataMap(7), DataArray(8);
+	BYTE(0), SHORT(1), INTEGER(2), LONG(3), FLOAT(4), DOUBLE(5), STRING(6), MAP(7), ARRAY(8);
 
 	public static Charset UTF8 = Charset.forName("UTF-8");
 
@@ -28,9 +28,5 @@ public enum DataType {
 			throw new IllegalArgumentException("Data Type ID out of bounds!");
 		}
 		return idLookup[id];
-	}
-
-	public static DataType getType(Data<?> data) {
-		return valueOf(data.getClass().getSimpleName());
 	}
 }

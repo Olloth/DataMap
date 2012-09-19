@@ -22,8 +22,13 @@ public final class DataMap extends HashMap<String, Data<?>> implements DataHolde
 	public void write(DataOutputStream os) throws IOException {
 		for (Entry<String, Data<?>> entry : this.entrySet()) {
 			os.writeUTF(entry.getKey());
-			os.writeByte(DataType.getType(entry.getValue()).getId());
+			os.writeByte(entry.getValue().getType().getId());
 			entry.getValue().write(os);
 		}
+	}
+
+	@Override
+	public DataType getType() {
+		return DataType.MAP;
 	}
 }

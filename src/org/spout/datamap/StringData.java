@@ -14,4 +14,9 @@ public final class StringData extends BasicData<String> {
 		os.writeUTF(this.getValue());
 	}
 
+	@Override
+	public DataType getType() {
+		return DataType.STRING;
+	}
+
 }

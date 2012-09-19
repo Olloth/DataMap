@@ -29,7 +29,12 @@ public class DataArray<T> extends ArrayList<Data<T>> implements Data<ArrayList<D
 		}
 	}
 
-	public Class<T> getType() {
+	public Class<T> getDataType() {
 		return type;
+	}
+
+	@Override
+	public DataType getType() {
+		return DataType.ARRAY;
 	}
 }

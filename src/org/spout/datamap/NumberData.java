@@ -28,4 +28,25 @@ public class NumberData extends BasicData<Number>{
 		}
 	}
 
+	@Override
+	public DataType getType() {
+		Number value = getValue();
+		if (value instanceof Byte) {
+			return DataType.BYTE;
+		} else if (value instanceof Short) {
+			return DataType.SHORT;
+		} else if (value instanceof Integer) {
+			return DataType.INTEGER;
+		} else if (value instanceof Long) {
+			return DataType.LONG;
+		} else if (value instanceof Float) {
+			return DataType.FLOAT;
+		} else if (value instanceof Double) {
+			return DataType.DOUBLE;
+		} else {
+			throw new IllegalStateException("Unknown datatype : " + value);
+		}
+	}
+
+	
 }
