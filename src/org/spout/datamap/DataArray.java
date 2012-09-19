@@ -1,26 +1,35 @@
 package org.spout.datamap;
 
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 
-public class DataArray extends ArrayList<Data<?>> implements Data<ArrayList<Data<?>>>{
+public class DataArray<T> extends ArrayList<Data<T>> implements Data<ArrayList<Data<T>>>{
 
 	private static final long serialVersionUID = -8651980785416461762L;
 
-	public ArrayList<Data<?>> getValue() {
+	private final Class<T> type; 
+
+	public DataArray(Class<T> type) {
+		super();
+		this.type = type;
+	}
+
+	@Override
+	public ArrayList<Data<T>> getValue() {
 		return this;
 	}
 
 	@Override
-	public boolean save(OutputStream stream) {
-		// TODO Auto-generated method stub
-		return false;
+	public void write(DataOutputStream os) throws IOException {
+		os.writeByte(DataType.valueOf(type.getSimpleName()).getId());
+
+		for (Data<T> data : this.getValue()) {
+			data.write(os);
+		}
 	}
 
-	@Override
-	public Data<ArrayList<Data<?>>> load(InputStream stream) {
-		// TODO Auto-generated method stub
-		return null;
+	public Class<T> getType() {
+		return type;
 	}
 }

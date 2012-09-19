@@ -1,30 +1,17 @@
 package org.spout.datamap;
 
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 
-public class DoubleData implements Data<Double> {
-	
-	private final double value;
-	
-	public DoubleData(double value) {
-		this.value = value;
+public class DoubleData extends BasicData<Double> {
+
+	public DoubleData(Double value) {
+		super(value);
 	}
 
 	@Override
-	public Double getValue() {
-		return value;
+	public void write(DataOutputStream os) throws IOException {
+		os.writeDouble(this.getValue());
 	}
 
-	@Override
-	public boolean save(OutputStream stream) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public Data<Double> load(InputStream stream) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

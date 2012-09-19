@@ -1,30 +1,17 @@
 package org.spout.datamap;
 
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.IOException;
+import java.io.DataOutputStream;
 
-public class ByteData implements Data<Byte> {
-	
-	private final byte value;
-	
-	public ByteData(byte value) {
-		this.value = value;
+public class ByteData extends BasicData<Byte> {
+
+	public ByteData(Byte value) {
+		super(value);
 	}
 
 	@Override
-	public Byte getValue() {
-		return value;
+	public void write(DataOutputStream os) throws IOException {
+		os.write(this.getValue());
 	}
 
-	@Override
-	public boolean save(OutputStream stream) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public Data<Byte> load(InputStream stream) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

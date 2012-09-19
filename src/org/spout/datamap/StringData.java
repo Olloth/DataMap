@@ -1,30 +1,17 @@
 package org.spout.datamap;
 
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 
-public class StringData implements Data<String> {
-	
-	private final String value;
+public final class StringData extends BasicData<String> {
 	
 	public StringData(String value) {
-		this.value = value;
+		super(value);
 	}
 
 	@Override
-	public String getValue() {
-		return value;
+	public void write(DataOutputStream os) throws IOException {
+		os.writeUTF(this.getValue());
 	}
 
-	@Override
-	public boolean save(OutputStream stream) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public Data<String> load(InputStream stream) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

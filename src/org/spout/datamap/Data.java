@@ -1,7 +1,7 @@
 package org.spout.datamap;
 
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.IOException;
+import java.io.DataOutputStream;
 
 interface Data<T> {
 
@@ -12,7 +12,5 @@ interface Data<T> {
 	 */
 	public T getValue();
 
-	public boolean save(OutputStream stream);
-
-	public Data<T> load(InputStream stream);
+	public void write(DataOutputStream os) throws IOException;
 }

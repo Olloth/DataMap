@@ -1,41 +1,29 @@
 package org.spout.datamap;
 
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map.Entry;
 
-public class DataMap extends HashMap<String, Data<?>> implements Data<HashMap<String, Data<?>>> {
+public final class DataMap extends HashMap<String, Data<?>> implements DataHolder {
 
 	private static final long serialVersionUID = 4048354559429223022L;
 	
-	private final int version;
-	
-	public DataMap(int version) {
-		super();
-		this.version = version;
-	}
-
 	public DataMap() {
-		this(0);
+		super();
 	}
 
-	public HashMap<String, Data<?>> getValue() {
+	@Override
+	public DataMap getValue() {
 		return this;
 	}
 
-	public int getVersion() {
-		return version;
-	}
-
 	@Override
-	public boolean save(OutputStream stream) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public Data<HashMap<String, Data<?>>> load(InputStream stream) {
-		// TODO Auto-generated method stub
-		return null;
+	public void write(DataOutputStream os) throws IOException {
+		for (Entry<String, Data<?>> entry : this.entrySet()) {
+			os.writeUTF(entry.getKey());
+			os.writeByte(DataType.getType(entry.getValue()).getId());
+			entry.getValue().write(os);
+		}
 	}
 }

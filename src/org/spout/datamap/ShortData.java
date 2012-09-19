@@ -1,30 +1,17 @@
 package org.spout.datamap;
 
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.IOException;
+import java.io.DataOutputStream;
 
-public class ShortData implements Data<Short> {
-	
-	private final short value;
-	
-	public ShortData(short value) {
-		this.value = value;
+public class ShortData extends BasicData<Short> {
+
+	public ShortData(Short value) {
+		super(value);
 	}
 
 	@Override
-	public Short getValue() {
-		return value;
+	public void write(DataOutputStream os) throws IOException {
+		os.writeShort(this.getValue());
 	}
 
-	@Override
-	public boolean save(OutputStream stream) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public Data<Short> load(InputStream stream) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

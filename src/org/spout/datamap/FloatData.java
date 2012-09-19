@@ -1,30 +1,17 @@
 package org.spout.datamap;
 
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 
-public class FloatData implements Data<Float> {
-	
-	private final float value;
-	
-	public FloatData(float value) {
-		this.value = value;
+public class FloatData extends BasicData<Float> {
+
+	public FloatData(Float value) {
+		super(value);
 	}
 
 	@Override
-	public Float getValue() {
-		return value;
+	public void write(DataOutputStream os) throws IOException {
+		os.writeFloat(this.getValue());
 	}
 
-	@Override
-	public boolean save(OutputStream stream) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public Data<Float> load(InputStream stream) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }
