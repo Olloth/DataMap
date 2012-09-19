@@ -1,7 +1,15 @@
 package org.spout.datamap;
 
-public interface DataHolder extends Data {
+/**
+ * Represents an object that has a {@link=DataMap} to store its variables for the purposes of persistence and/or synchronization.
+ *
+ */
+public interface DataHolder {
 
-	@Override
-	public DataMap getValue();
+	/**
+	 * Gets the DataMap representing data intended for persistence or synchronization.
+	 * 
+	 * @return the datamap
+	 */
+	public DataMap getData();
 }

@@ -65,4 +65,10 @@ public enum DataType {
 			return null;
 		}
 	}
+
+	static {
+		for (DataType type : DataType.values()) {
+			idLookup[type.getId()] = type; 
+		}
+	}
 }

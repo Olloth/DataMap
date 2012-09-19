@@ -4,12 +4,15 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Map.Entry;
 
-public final class DataMap extends HashMap<String, Data> implements DataHolder {
+public final class DataMap extends LinkedHashMap<String, Data> implements Data {
 
 	private static final long serialVersionUID = 4048354559429223022L;
+	//TODO: Add smarter puts for all the primitive types.
+	//TODO: Implement a DefaultedKey system rather than always raw strings.
 
 	/**
 	 * Create a new {@link=Data} entry that can hold other data entries in a
@@ -20,15 +23,15 @@ public final class DataMap extends HashMap<String, Data> implements DataHolder {
 	}
 
 	@Override
-	public DataMap getValue() {
-		return (DataMap) Collections.unmodifiableMap(this);
+	public Map<String, Data> getValue() {
+		return Collections.unmodifiableMap(this);
 	}
 
 	@Override
 	public void write(DataOutputStream os) throws IOException {
 		for (Entry<String, Data> entry : getValue().entrySet()) {
-			os.writeUTF(entry.getKey());
 			os.writeByte(entry.getValue().getType().getId());
+			os.writeUTF(entry.getKey());
 			entry.getValue().write(os);
 		}
 		os.writeByte(DataType.END.getId());
@@ -48,6 +51,9 @@ public final class DataMap extends HashMap<String, Data> implements DataHolder {
 			int id = is.readByte();
 			// Type for this entry
 			DataType type = DataType.getType(id);
+			if(type == null) {
+				throw new IOException("Reading halted! " + id);
+			}
 
 			// End of this particular DataMap
 			if (type.equals(DataType.END)) {
@@ -68,13 +74,13 @@ public final class DataMap extends HashMap<String, Data> implements DataHolder {
 
 	@Override
 	public String toString() {
-		String string = "";
+		String string = "\n{";
 		for (Entry<String, Data> entry : this.getValue().entrySet()) {
-			string += entry.getKey() + " ";
-			string += entry.getValue().getType().getId() + " ";
-			string += entry.toString() + " ";
+			string += "id:" + entry.getValue().getType().getId() + " ";
+			string += "key:" + entry.getKey() + " ";
+			string += "value:{" + entry.getValue().toString() + "}\n";
 		}
-		string += DataType.END.getId() + " ";
+		string += "END}";
 		return string;
 	}
 }

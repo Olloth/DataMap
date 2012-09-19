@@ -4,10 +4,7 @@ import java.io.IOException;
 import java.io.DataOutputStream;
 
 /**
- * Represents a specific data entry that can be sent out via {@link=DataOutputStream},
- * and read to memory via {@link=DataInputStream}.
- * 
- * Can be used to for disk I/O or network I/O.
+ * Represents a specific data entry that is intended for persistence and/or synchronization.
  */
 interface Data {
 

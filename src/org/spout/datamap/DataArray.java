@@ -1,6 +1,5 @@
 package org.spout.datamap;
 
-import java.awt.Window.Type;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -78,12 +77,9 @@ public class DataArray extends ArrayList<Data> implements Data {
 	@Override
 	public String toString() {
 		String string = "";
-		string += getEntryType().getId() + " ";
-		string += getValue().size() + " ";
-
-		for (Data data : this.getValue()) {
-			string += data.toString() + " ";
-		}
+		string += "dataType:" + getEntryType().getId() + " ";
+		string += "size:" + getValue().size() + " ";
+		string += "value:" + super.toString();
 
 		return string;
 	}
