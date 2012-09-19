@@ -3,7 +3,7 @@ package org.spout.datamap;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-public class NumberData implements Data<Number> {
+public class NumberData implements Data {
 
 	private final Number value;
 

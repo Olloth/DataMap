@@ -8,17 +8,15 @@ import java.io.DataOutputStream;
  * and read to memory via {@link=DataInputStream}.
  * 
  * Can be used to for disk I/O or network I/O.
- *
- * @param <T> Type for the data being stored.
  */
-interface Data<T> {
+interface Data {
 
 	/**
 	 * Get the value being held in this data entry
 	 * 
 	 * @return value held
 	 */
-	public T getValue();
+	public Object getValue();
 
 	/**
 	 * Writes the data entry out to the given DataOutputStream

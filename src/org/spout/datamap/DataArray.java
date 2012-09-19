@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class DataArray<T> extends ArrayList<Data<T>> implements Data<List<Data<T>>>{
+public class DataArray extends ArrayList<Data> implements Data {
 
 	private static final long serialVersionUID = -8651980785416461762L;
 
@@ -28,7 +28,7 @@ public class DataArray<T> extends ArrayList<Data<T>> implements Data<List<Data<T
 	}
 
 	@Override
-	public List<Data<T>> getValue() {
+	public List<Data> getValue() {
 		return Collections.unmodifiableList(this);
 	}
 
@@ -37,7 +37,7 @@ public class DataArray<T> extends ArrayList<Data<T>> implements Data<List<Data<T
 		os.writeByte(getEntryType().getId());
 		os.writeInt(getValue().size());
 
-		for (Data<T> data : this.getValue()) {
+		for (Data data : this.getValue()) {
 			data.write(os);
 		}
 	}
@@ -56,19 +56,20 @@ public class DataArray<T> extends ArrayList<Data<T>> implements Data<List<Data<T
 		return dataType;
 	}
 
-	public static DataArray<?> read(DataInputStream is) throws IOException {
+	public static DataArray read(DataInputStream is) throws IOException {
 		// ID number for this array's type
 		int id = is.readByte();
 		// Type for this array
 		DataType type = DataType.getType(id);
 
-		DataArray<?> dataArray = new DataArray<>(type);
+		DataArray dataArray = new DataArray(type);
 
 		// Size of this array
 		int size = is.readInt();
 
 		for (int i = 0; i < size; i++) {
-			//TODO: Read array values from the input stream
+			Data value = DataType.read(is, type);
+			dataArray.add(value);
 		}
 
 		return dataArray;
