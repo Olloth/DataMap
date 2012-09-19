@@ -3,7 +3,9 @@ package org.spout.datamap;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-public class NumberData extends BasicData<Number>{
+public class NumberData implements Data<Number> {
+
+	private final Number value;
 
 	/**
 	 * Create a new {@link=Data} entry with the given {@link=Number} value.
@@ -11,9 +13,13 @@ public class NumberData extends BasicData<Number>{
 	 * @param value to store
 	 */
 	public NumberData(Number value) {
-		super(value);
+		this.value = value;
 	}
 
+	@Override
+	public Number getValue() {
+		return value;
+	}
 	@Override
 	public void write(DataOutputStream os) throws IOException {
 		Number value = getValue();

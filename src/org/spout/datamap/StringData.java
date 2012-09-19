@@ -3,7 +3,9 @@ package org.spout.datamap;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-public final class StringData extends BasicData<String> {
+public final class StringData implements Data<String> {
+	
+	private final String value;
 
 	/**
 	 * Create a new {@link=Data} entry with the given {@link=String} value.
@@ -11,7 +13,12 @@ public final class StringData extends BasicData<String> {
 	 * @param value to store
 	 */
 	public StringData(String value) {
-		super(value);
+		this.value = value;
+	}
+
+	@Override
+	public String getValue() {
+		return value;
 	}
 
 	@Override
