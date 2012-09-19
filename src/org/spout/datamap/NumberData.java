@@ -4,27 +4,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 public class NumberData extends BasicData<Number>{
-	public NumberData(Byte value) {
-		super(value);
-	}
-
-	public NumberData(Short value) {
-		super(value);
-	}
-
-	public NumberData(Integer value) {
-		super(value);
-	}
-
-	public NumberData(Long value) {
-		super(value);
-	}
-
-	public NumberData(Float value) {
-		super(value);
-	}
-
-	public NumberData(Double value) {
+	public NumberData(Number value) {
 		super(value);
 	}
 
