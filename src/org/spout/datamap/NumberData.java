@@ -60,5 +60,18 @@ public class NumberData implements Data {
 		}
 	}
 
-	
+	@Override
+	public String toString() {
+		return getValue().toString();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		return getValue().equals(obj);
+	}
+
+	@Override
+	public int hashCode() {
+		return getValue().hashCode();
+	}
 }

@@ -31,4 +31,18 @@ public final class StringData implements Data {
 		return DataType.STRING;
 	}
 
+	@Override
+	public String toString() {
+		return getValue();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		return getValue().equals(obj);
+	}
+
+	@Override
+	public int hashCode() {
+		return getValue().hashCode();
+	}
 }

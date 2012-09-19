@@ -74,4 +74,27 @@ public class DataArray extends ArrayList<Data> implements Data {
 
 		return dataArray;
 	}
+
+	@Override
+	public String toString() {
+		String string = "";
+		string += getEntryType().getId() + " ";
+		string += getValue().size() + " ";
+
+		for (Data data : this.getValue()) {
+			string += data.toString() + " ";
+		}
+
+		return string;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		return getValue().equals(obj);
+	}
+
+	@Override
+	public int hashCode() {
+		return getValue().hashCode();
+	}
 }

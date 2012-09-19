@@ -65,4 +65,16 @@ public final class DataMap extends HashMap<String, Data> implements DataHolder {
 
 		return dataMap;
 	}
+
+	@Override
+	public String toString() {
+		String string = "";
+		for (Entry<String, Data> entry : this.getValue().entrySet()) {
+			string += entry.getKey() + " ";
+			string += entry.getValue().getType().getId() + " ";
+			string += entry.toString() + " ";
+		}
+		string += DataType.END.getId() + " ";
+		return string;
+	}
 }
