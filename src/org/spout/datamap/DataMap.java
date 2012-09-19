@@ -51,9 +51,6 @@ public final class DataMap extends LinkedHashMap<String, Data> implements Data {
 			int id = is.readByte();
 			// Type for this entry
 			DataType type = DataType.getType(id);
-			if(type == null) {
-				throw new IOException("Reading halted! " + id);
-			}
 
 			// End of this particular DataMap
 			if (type.equals(DataType.END)) {
