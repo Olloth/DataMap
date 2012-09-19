@@ -1,5 +1,7 @@
 package org.spout.datamap;
 
+import java.awt.Window.Type;
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,6 +21,9 @@ public class DataArray<T> extends ArrayList<Data<T>> implements Data<List<Data<T
 	 */
 	public DataArray(DataType type) {
 		super();
+		if (type.equals(DataType.END)) {
+			throw new IllegalArgumentException("Cannot create a DataArray of DataType.END");
+		}
 		this.dataType = type;
 	}
 
@@ -37,6 +42,11 @@ public class DataArray<T> extends ArrayList<Data<T>> implements Data<List<Data<T
 		}
 	}
 
+	@Override
+	public DataType getType() {
+		return DataType.ARRAY;
+	}
+
 	/**
 	 * Gets the {@link=DataType} that represents all the entries stored in this list.
 	 * 
@@ -46,8 +56,21 @@ public class DataArray<T> extends ArrayList<Data<T>> implements Data<List<Data<T
 		return dataType;
 	}
 
-	@Override
-	public DataType getType() {
-		return DataType.ARRAY;
+	public static DataArray<?> read(DataInputStream is) throws IOException {
+		// ID number for this array's type
+		int id = is.readByte();
+		// Type for this array
+		DataType type = DataType.getType(id);
+
+		DataArray<?> dataArray = new DataArray<>(type);
+
+		// Size of this array
+		int size = is.readInt();
+
+		for (int i = 0; i < size; i++) {
+			//TODO: Read array values from the input stream
+		}
+
+		return dataArray;
 	}
 }
