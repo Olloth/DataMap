@@ -4,7 +4,12 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 public final class StringData extends BasicData<String> {
-	
+
+	/**
+	 * Create a new {@link=Data} entry with the given {@link=String} value.
+	 * 
+	 * @param value to store
+	 */
 	public StringData(String value) {
 		super(value);
 	}

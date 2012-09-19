@@ -4,6 +4,12 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 public class NumberData extends BasicData<Number>{
+
+	/**
+	 * Create a new {@link=Data} entry with the given {@link=Number} value.
+	 * 
+	 * @param value to store
+	 */
 	public NumberData(Number value) {
 		super(value);
 	}
@@ -24,7 +30,7 @@ public class NumberData extends BasicData<Number>{
 		} else if (value instanceof Double) {
 			os.writeDouble(value.doubleValue());
 		} else {
-			throw new IllegalStateException("Unknown datatype : " + value);
+			throw new IllegalStateException("Unknown DataType for: " + value);
 		}
 	}
 
@@ -44,7 +50,7 @@ public class NumberData extends BasicData<Number>{
 		} else if (value instanceof Double) {
 			return DataType.DOUBLE;
 		} else {
-			throw new IllegalStateException("Unknown datatype : " + value);
+			throw new IllegalStateException("Unknown DataType for: " + value);
 		}
 	}
 
